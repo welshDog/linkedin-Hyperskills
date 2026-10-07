@@ -1,75 +1,91 @@
 # LinkedIn Hyperskills
 
-Neurodivergent-first LinkedIn content engineering system.
+Neurodivergent-first LinkedIn content operating system.
 
-This repo is a concept and strategy layer built on top of the idea behind `sergebulaev/linkedin-skills`, but reframed as a more serious content operating system for founders, operators, and personal brands.
+This repo is no longer just a repo audit. It is now a strategic product foundation for a smarter LinkedIn growth system.
 
-## Core thesis
+## The shift
 
-Most LinkedIn AI tools are just prompt wrappers. This project aims to go one layer deeper:
+The real opportunity is not “AI writes a post.”
+
+The real opportunity is:
+
+- learning a person’s actual voice
+- checking risk before publishing
+- learning from engagement data
+- creating content systems that compound
+- turning one idea into an entire content engine
+
+## Why this matters
+
+Most AI LinkedIn tools produce polished slop.
+
+This project aims to produce trusted, strategic, human-sounding output built around:
 
 - brand memory
 - claim safety
-- performance feedback loops
-- founder and operator playbooks
-- content systems, not just content generation
+- posting intelligence
+- repeatable playbooks
+- founder-grade positioning
 
-## What this repo is
+## The next-level product thesis
 
-A living design brief for a premium LinkedIn content stack that blends:
+This repo is the blueprint for a platform that helps founders, operators, and creators build a LinkedIn presence without sounding like a generic chatbot.
+
+It combines:
 
 - writing intelligence
-- strategic positioning
-- automated content workflows
-- safety and compliance checks
-- performance analytics
-- AI-assisted publishing with human approval
+- strategic guidance
+- decision support
+- approval safety
+- analytics feedback
 
-## Why it matters
+## What is inside
 
-The real value is not “AI writes a post.”
+- `docs/repo-rate-roast.md` — critical review and scorecard
+- `docs/recommendations-and-ideas.md` — high-value feature concepts
+- `docs/roadmap-next-build.md` — system-level roadmap
+- `docs/competitor-analysis.md` — strategic market position
+- `docs/architecture.md` — product architecture and system design
+- `docs/mvp-roadmap.md` — rollout plan for the first real build
+- `src/brand_memory.py` — starter brand memory profile model
+- `src/claim_safety.py` — starter claim-risk evaluator
+- `src/content_score.py` — starter content scoring engine
 
-The real value is:
+## Product direction
 
-- learning a founder’s voice
-- aligning content with actual business goals
-- reducing sloppy or unverifiable claims
-- turning engagement data into repeatable strategy
-- building a system that compounds
+The strongest category move is:
 
-## Core goals
+- “AI content operating system for founder-led personal branding”
 
-1. Learn a real personal or brand voice
-2. Generate content that matches audience + intent
-3. Check claims before publication
-4. Analyze what content performs and why
-5. Turn content into a repeatable operating system
+Not:
 
-## Repo structure
+- generic LinkedIn ghostwriter
+- prompt pack
+- another content generator
 
-- `docs/repo-rate-roast.md` — scoring, roast, strengths, weaknesses
-- `docs/recommendations-and-ideas.md` — practical improvements and feature ideas
-- `docs/roadmap-next-build.md` — how to evolve this into a product
-- `docs/competitor-analysis.md` — how this compares to the market
+## Core pillars
 
-## Top-line rating
+1. Voice memory
+2. Trust and claim safety
+3. Content scoring
+4. Analytics loop
+5. Campaign orchestration
 
-- Overall: 8.6/10
-- Product polish: 9/10
-- Technical depth: 8/10
-- UX clarity: 8.5/10
-- Originality: 7.5/10
+## What this repo is trying to become
 
-## The biggest opportunity
+A system that helps a person:
 
-The move from “AI LinkedIn skill pack” to “brand intelligence engine.”
-
-That is the real moat.
+- speak in their own voice
+- publish with more context
+- avoid perception-risk claims
+- learn what performs
+- increase trust without sounding robotic
 
 ## The mission statement
 
-Build a neurodivergent-first LinkedIn content system that helps people create authentic, high-signal, commercially useful content without sounding like generic AI slop.
+Build a neurodivergent-first LinkedIn growth system that turns content into compounding signal — not noise.
 
 ---
 
-This repo is the strategic layer, not the final product. It is a direction for what happens when LinkedIn content becomes an actual operating system.
+This is the strategic layer. The real product is the loop: learn, write, score, improve, publish, learn again.
