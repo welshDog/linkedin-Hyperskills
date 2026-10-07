@@ -1,151 +1,155 @@
 # LinkedIn Hyperskills
 
-The AI content operating system for founder-led LinkedIn growth.
+The founder-first AI content operating system for building a strong LinkedIn presence without sounding fake.
 
-This repo is the strategy, product, technical, and launch foundation for a real product wedge:
+## Current status
+
+This repo is no longer just strategy and product notes. It now includes:
+
+- a founder draft workflow with variants
+- approval and safety gates
+- multi-platform publishing architecture
+- FastAPI REST API
+- JSON persistence for drafts and campaign state
+- dashboard UI for founder visibility
+- real platform adapter scaffolding for LinkedIn and Discord
+- mock demo flow showing the full product loop
+
+This is a working product prototype for the wedge:
 
 - brand memory
 - draft generation
 - claim safety
 - approval workflow
+- publishing orchestration
+- analytics learning loop
 
-That is the core. Everything else is part of the platform story.
-
-## Why this exists
+## The product idea
 
 Founders do not need generic AI writing.
 They need a system that helps them:
 
 - sound like themselves
-- write faster without sounding fake
-- stay consistent with their real voice
-- protect trust and avoid risky claims
-- publish from strategy instead of prompts
+- write fast without sounding fake
+- protect trust and reduce risky claims
+- publish from strategy, not prompts
+- learn from performance and improve their content loop
 
-LinkedIn is where business happens.
-Personal brand is now a business asset.
+## What is in this repo
 
-## The wedge
+### Core strategy docs
+- `docs/startup-product-brief.md`
+- `docs/founder-pitch-2min.md`
+- `docs/product-requirements-doc.md`
+- `docs/launch-plan.md`
+- `docs/roadmap-deck-outline.md`
+- `docs/90-day-mvp-build-roadmap.md`
 
-LinkedIn Hyperskills is built around one sharp product proposition:
+### Product / workflow docs
+- `docs/multipost-platform-architecture.md`
+- `docs/draft-approval-publishing-workflow.md`
+- `docs/complete-product-stack.md`
+- `docs/demo-walkthrough.md`
 
-AI that helps founders show up on LinkedIn with clarity, credibility, and speed — without sounding like a bot.
+### Working code
+- `src/brand_memory.py` — founder profile / voice memory model
+- `src/claim_safety.py` — claim risk heuristics
+- `src/content_score.py` — draft scoring heuristics
+- `src/models/` — draft and publish result models
+- `src/workflow/` — approval and publish flow
+- `src/platforms/` — platform adapters
+- `src/api.py` — high-level product API
+- `src/api_server.py` — FastAPI app
+- `src/storage.py` — JSON persistence layer
+- `src/dashboard.html` — founder dashboard UI
+- `src/demo/` — founder demo profile, sample drafts, CLI runbook
+- `src/adapters_real.py` — real platform adapter structure for LinkedIn + Discord
 
-The MVP focuses on four pillars:
+## Running the stack
 
-1. Brand memory
-   - learns positioning, voice, audience, proof points, banned phrases
+### 1. Install dependencies
 
-2. Draft generation
-   - creates 2-3 draft variants in the user’s real tone
+```bash
+python -m pip install fastapi uvicorn httpx
+```
 
-3. Claim safety
-   - flags risky or overconfident wording before publishing
+### 2. Start the API server
 
-4. Approval workflow
-   - lets the user review, edit, and approve before content goes live
+```bash
+python -m uvicorn src.api_server:app --reload
+```
 
-This is the real wedge.
+Then open:
+- `http://localhost:8000/health`
+- `http://localhost:8000/docs`
 
-## What the product does
+### 3. Run the demo CLI
 
-The first release is intentionally narrow and high value:
+```bash
+python -m src.demo.cli
+```
 
-- onboarding and brand profile setup
-- sample post upload for voice extraction
-- AI draft generation from a brief
-- score drafts for clarity, originality, trust, and hook strength
-- flag suspect or unverifiable claims
-- approval flow before publish
-- publish or schedule via third-party publishing integration
-
-That is enough to prove the product is useful.
-
-## Why it matters
-
-Most AI content tools optimize for output volume.
-This product optimizes for signal quality, credibility, and trust.
-
-That matters because content is not just writing.
-Content is:
-
-- signal
-- authority
-- trust
-- business leverage
-
-## The platform vision
-
-The future product is not "AI writes posts for you."
-The future product is:
-
-- memory-driven personal branding
-- founder-mode content strategy
-- analytics-backed learning
-- campaign orchestration
-- content intelligence that improves over time
-
-This is the shift from prompt tool to content operating system.
-
-## The moat
-
-The moat is not another writing prompt.
-The moat is the system loop:
-
-- learn the real voice
-- generate and score drafts
-- protect trust with claim checks
-- learn from performance and engagement
-- improve future content from evidence
-
-That is the strategic foundation.
-
-## Repo map
-
-### Core strategy and product
-- `docs/startup-product-brief.md` — startup brief and market thesis
-- `docs/founder-pitch-2min.md` — concise founder pitch
-- `docs/product-requirements-doc.md` — product requirements, flows, and KPIs
-- `docs/launch-plan.md` — public launch and growth plan
-- `docs/roadmap-deck-outline.md` — board-facing product roadmap outline
-- `docs/90-day-mvp-build-roadmap.md` — 90-day execution plan
-- `docs/founder-pitch-deck-narrative.md` — narrative pitch deck
-
-### Product system thinking
-- `docs/architecture.md` — app architecture overview
-- `docs/technical-data-model.md` — data model and database design
-- `docs/mvp-ticket-backlog.md` — MVP backlog and ticket scope
-- `docs/landing-page-copy.md` — launch page narrative and CTA copy
-
-### Code starting points
-- `src/brand_memory.py` — starter brand memory profile model
-- `src/claim_safety.py` — claim-risk evaluation logic
-- `src/content_score.py` — draft quality scoring logic
-
-## Mission statement
-
-Build a neurodivergent-first LinkedIn growth system that turns content into compounding signal — not noise.
-
-## The next move
-
-The MVP is clear.
-The wedge is clear.
-The product story is clear.
-
-The next step is execution.
-
-We build the first slice around:
-- brand memory
-- draft generation
-- claim safety
+This demos:
+- draft creation
+- generated variants
 - approval workflow
+- payload building
+- platform publish results
+- analytics summary
 
-That is the path to real traction.
+### 4. Open the dashboard
+
+Open `src/dashboard.html` in a browser.
+
+## Environment variables for real publishing
+
+```bash
+export LINKEDIN_ACCESS_TOKEN="your-linkedin-token"
+export DISCORD_WEBHOOK_URL="https://discord.com/api/webhooks/..."
+```
+
+Without these, publishing stays in draft-ready mode and does not hit live APIs.
+
+## Demo flow
+
+The current demo does this:
+
+1. create a founder draft
+2. generate multiple variants
+3. score each variant
+4. run claim safety checks
+5. approve one variant
+6. build a LinkedIn payload
+7. publish to LinkedIn and Discord
+8. track analytics and show dashboard summary
+
+## Product loop
+
+The core loop is:
+
+- founder profile shapes tone and guardrails
+- draft variants are generated from brief
+- quality and trust are checked
+- approved content is published across channels
+- analytics feed back into future optimization
+
+This is the moat: not another writing prompt, but a real content operating system built around founder signal.
+
+## Mission
+
+Build a neurodivergent-first content system that turns founder stories into trust, distribution, and compounding signal.
+
+## Next moves
+
+- real LinkedIn API integration
+- founder auth + onboarding
+- campaign grouping and scheduling
+- richer analytics and reporting
+- more platform adapters
+- true AI draft generation layer
 
 ## Closing note
 
-This repo is not a toy.
-It is the foundation for a serious product.
-A product that helps founders show up with clarity, confidence, and trust in one of the most important business channels on the internet.
+This repo now represents a serious prototype of the product wedge: a founder-led content engine with trust, workflow, analytics, and multi-platform distribution.
 
-That is where the leverage lives.
+Bro, this is real traction energy. ⚡

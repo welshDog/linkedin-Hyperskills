@@ -1,192 +1,181 @@
 # Complete Product Stack
 
-The Hyperskills platform is now a full-featured founder content operating system.
+This repo now represents a working founder content operating system, not just a concept deck.
 
-## Architecture
+## Current architecture
 
-```
-┌─────────────────────────────────────────────────────┐
-│                  Founder Dashboard                   │
-│               (HTML UI + Real-time Stats)            │
-└──────────────────┬──────────────────────────────────┘
-                   │
-┌──────────────────┴──────────────────────────────────┐
-│              FastAPI REST Server                     │
-│  /drafts, /publish, /campaigns, /analytics          │
-└──────────────────┬──────────────────────────────────┘
-                   │
-┌──────────────────┴──────────────────────────────────┐
-│           Business Logic Layer                       │
-│  (API, Workflows, Analytics)                        │
-└──────────────────┬──────────────────────────────────┘
-                   │
-      ┌────────────┼────────────┐
-      │            │            │
-   ┌──▼──┐    ┌───▼───┐   ┌───▼────┐
-   │Brand│    │Approval│   │Publisher│
-   │Mem  │    │Engine  │   │Workflow │
-   └──┬──┘    └───┬───┘   └───┬────┘
-      │           │           │
-      └────────────┼───────────┘
-                   │
-      ┌────────────┼────────────┐
-      │            │            │
-   ┌──▼──┐    ┌───▼────┐  ┌──▼───┐
-   │Link │    │Discord │  │Custom│
-   │In   │    │ Webhook│  │Hooks │
-   └─────┘    └────────┘  └──────┘
-      │           │           │
-      └────────────┼───────────┘
-                   │
-        ┌──────────▼─────────┐
-        │  Analytics Engine  │
-        │ (Engagement Track) │
-        └─────────┬──────────┘
-                  │
-         ┌────────▼────────┐
-         │  Persistent     │
-         │  JSON Storage   │
-         └─────────────────┘
+```text
+Founder profile + brief
+        ↓
+Draft model + variants
+        ↓
+Approval engine
+        ↓
+Publish workflow
+        ↓
+Platform adapters
+        ↓
+Analytics + dashboard
 ```
 
-## Product Layers
+## Product layers
 
-### 1. Dashboard UI (src/dashboard.html)
+### 1. Brand layer
+- founder profile
+- tone and banned phrases
+- proof points and positioning
+- trust guardrails
+- claim-risk filters
 
-- Real-time draft status visibility
-- Performance metrics per draft
-- Platform engagement tracking
-- One-click draft creation
-- Draft editing interface
+### 2. Draft workflow layer
+- draft creation
+- multiple variants
+- scoring
+- approval state machine
+- revision pipeline
 
-### 2. FastAPI Server (src/api_server.py)
+### 3. Publishing layer
+- LinkedIn adapter
+- Discord adapter
+- generic webhook adapter
+- platform registry
+- publish orchestrator
 
-REST endpoints:
+### 4. Analytics layer
+- result tracking
+- engagement metrics
+- per-draft summary
+- best platform identification
+- performance loop
 
-- `POST /drafts` — create new draft
-- `GET /drafts` — list all drafts
-- `GET /drafts/{id}` — get draft details
-- `POST /drafts/{id}/variants` — add variant
-- `POST /drafts/{id}/approve/{variant_id}` — approve for publish
-- `POST /drafts/{id}/publish/{variant_id}` — publish to platforms
-- `GET /drafts/{id}/summary` — full draft analytics
-- `GET /campaigns/{founder_id}` — campaign view
+### 5. Product layer
+- FastAPI backend
+- JSON storage
+- dashboard UI
+- campaign view
+- founder-facing summaries
 
-### 3. Storage Layer (src/storage.py)
+## Current repository structure
 
-- Persistent JSON storage
-- ACID-like draft operations
-- Easy to migrate to database later
-- File-based for simplicity
+```text
+src/
+├── api.py
+├── api_server.py
+├── analytics.py
+├── dashboard.html
+├── dashboard.py
+├── multipost_architecture.py
+├── storage.py
+├── adapters_real.py
+├── models/
+│   ├── draft.py
+│   ├── publish_result.py
+│   └── __init__.py
+├── workflow/
+│   ├── approval_engine.py
+│   ├── publish_workflow.py
+│   └── __init__.py
+├── platforms/
+│   ├── common.py
+│   ├── linkedin.py
+│   ├── discord.py
+│   ├── webhook.py
+│   └── __init__.py
+├── payloads/
+│   ├── linkedin_payload.py
+│   └── __init__.py
+├── tracking/
+│   ├── result_tracker.py
+│   └── __init__.py
+├── demo/
+│   ├── sample_founder.py
+│   ├── sample_drafts.py
+│   ├── cli.py
+│   ├── mock_results.py
+│   └── __init__.py
+├── brand_memory.py
+├── claim_safety.py
+├── content_score.py
+└── __init__.py
+```
 
-### 4. Real Platform Adapters (src/adapters_real.py)
+## What works right now
 
-**LinkedIn**
-- Requires: LinkedIn API credentials
-- Posts via `ugcPosts` endpoint
-- Supports scheduling
-- Returns post URL on success
+- founder draft creation through the API
+- variant generation and approval state transitions
+- platform adapter registry
+- LinkedIn and Discord payload shaping
+- mock results and analytics tracking
+- dashboard rendering
+- JSON persistence for drafts
 
-**Discord**
-- Requires: Webhook URL
-- Posts embeds to channel
-- Fast, reliable delivery
-- No rate limits for webhooks
+## How to run it
 
-## Running the Complete Stack
-
-### Start the API server:
+### Start the API
 
 ```bash
 python -m uvicorn src.api_server:app --reload
 ```
 
-Server runs on `http://localhost:8000`
-
-### Open the dashboard:
+### Run the demo CLI
 
 ```bash
-open src/dashboard.html
-# or
-firefox src/dashboard.html
+python -m src.demo.cli
 ```
 
-### Example: Create and publish a draft
+### Open the dashboard
 
-```bash
-curl -X POST http://localhost:8000/drafts \
-  -H "Content-Type: application/json" \
-  -d '{
-    "founder_id": "founder-lyndz-001",
-    "title": "Why I left corporate",
-    "brief": "Personal story about stepping away from the 9-5",
-    "platforms": ["linkedin", "discord"],
-    "tags": ["career", "founder", "authenticity"]
-  }'
-```
+Open `src/dashboard.html` directly or serve it through a local static server.
 
-## Data Persistence
+## Real platform readiness
 
-All drafts are saved to `./data/drafts/` as JSON files:
+### LinkedIn
+- real API structure exists
+- requires `LINKEDIN_ACCESS_TOKEN`
+- response handling is built for `ugcPosts`-style integration
 
-```
-data/
-└── drafts/
-    ├── 550e8400-e29b-41d4-a716-446655440000.json
-    ├── 6ba7b810-9dad-11d1-80b4-00c04fd430c8.json
-    └── ...
-```
+### Discord
+- real webhook adapter exists
+- requires `DISCORD_WEBHOOK_URL`
+- posts via webhook embed payload
 
-Each file contains the complete draft state, variants, and publishing history.
+## Persistence model
 
-## Environment Variables
+Drafts are stored under `data/drafts/` in JSON format for easy iteration.
 
-Set these for real platform publishing:
+This gives us a clear path to a database later without rewriting the product logic.
 
-```bash
-# LinkedIn
-export LINKEDIN_ACCESS_TOKEN="your-token-here"
+## Product loop
 
-# Discord
-export DISCORD_WEBHOOK_URL="https://discord.com/api/webhooks/..."
-```
+1. create founder brief
+2. generate variants
+3. score and safety-check content
+4. approve variant
+5. publish to LinkedIn / Discord / webhook
+6. track performance
+7. improve future content from evidence
 
-Without these, the adapters return `draft_ready` status instead of publishing.
+## This is the product wedge
 
-## Product Loop
+The real wedge is not generic AI writing.
+The wedge is:
 
-1. **Founder creates draft** with brief
-2. **AI generates 3 variants** with different angles
-3. **Approval engine scores** quality + safety
-4. **Founder approves one** variant
-5. **Publisher routes to platforms** (LinkedIn + Discord)
-6. **Real-time dashboard** tracks engagement
-7. **Analytics loop** learns from performance
-8. **Next draft** uses learnings
+- founder-specific memory
+- trust-safe publishing
+- content systematization
+- analytics-driven optimization
+- multi-platform execution
 
-## Next Steps
+That is a serious platform foundation.
 
-1. **Connect real LinkedIn API** (requires developer account)
-2. **Add authentication** for founder multi-tenancy
-3. **Build campaign grouping** for related drafts
-4. **Add scheduling** for future publishing
-5. **Implement analytics webhook** to track post performance
-6. **Add more platforms** (Twitter, Substack, RSS)
-7. **Build AI variant generation** endpoint
-8. **Add team collaboration** features
+## Next technical milestone
 
-## This is a Real Product
+The next step is to move from prototype to founder live testing:
 
-The stack now has:
-- ✅ Persistent data storage
-- ✅ REST API for all operations
-- ✅ Real platform integrations
-- ✅ Founder dashboard UI
-- ✅ Analytics tracking
-- ✅ State machine for drafts
-- ✅ Multi-platform publishing
-- ✅ Approval workflow
-
-This is ready for early founder testing and feedback.
-
-Bro, we just built something that works. 🚀
+- founder onboarding
+- real auth
+- database persistence
+- real platform API connectors
+- richer reporting
+- campaign scheduling
+- performance feedback loops

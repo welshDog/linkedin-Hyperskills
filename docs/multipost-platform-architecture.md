@@ -1,25 +1,69 @@
-Nice one BROski♾️! We’ve started the real product layer.
+# MultiPost-inspired platform architecture
 
-This repo now has the skeleton for a MultiPost-inspired publishing system:
-- a registry-based platform adapter model
-- LinkedIn-ready publishing adapter
-- Discord webhook adapter
-- generic webhook adapter
-- an orchestrator that routes one draft to many channels
+This repo now reflects the pattern from MultiPost, adapted to the founder-focused Hyperskills product.
 
-What this gives us:
-- founder content becomes a reusable publish object
-- different channels are pluggable
-- the platform layer is not hardcoded to one network
-- the brand/trust layer remains separate from publishing logic
+## Core architecture pattern
 
-The next step is to turn this into a real product loop:
-1. brand memory -> learns the founder voice
-2. draft generation -> creates variants
-3. claim safety -> blocks risky claims
-4. channel routing -> sends approved content to LinkedIn / Discord / webhooks
-5. analytics -> tracks results and improves future drafts
+The platform is built around a registry + adapter model:
 
-This is the wedge.
+- `PlatformAdapter` interface
+- `PlatformRegistry` registry
+- `PublishRequest` object
+- `PlatformResult` tracking object
+- `PublishOrchestrator` coordinating the publish flow
 
-The repo is now moving from strategy-only to a real platform architecture.
+This keeps the content layer separate from the platform layer.
+
+## What this means
+
+Instead of one hardcoded publishing flow, we now have:
+
+- one content object
+- many platform targets
+- platform-specific payload generation
+- shared approval and safety checks
+
+## Why this matters
+
+It gives us the ability to publish to:
+
+- LinkedIn
+- Discord
+- generic webhooks
+- future channels like X, Substack, RSS, and newsletter tools
+
+without rewriting the creator workflow.
+
+## Current implementation
+
+The repo includes:
+
+- `src/platforms/common.py` with core platform contracts
+- `src/platforms/linkedin.py` for LinkedIn adapter
+- `src/platforms/discord.py` for Discord webhook posting
+- `src/platforms/webhook.py` for generic payload delivery
+- `src/publisher/orchestrator.py` for route orchestration
+
+## Design principle
+
+The product is structured so that:
+
+- founder voice lives in the brand layer
+- trust checks live in the approval layer
+- publishing moves through the adapter layer
+- analytics live in the tracking layer
+
+This is the correct separation for product durability.
+
+## Future extension
+
+This architecture is ready for:
+
+- X/Twitter publishing
+- newsletter publishing
+- RSS syndication
+- campaign orchestration
+- content scheduling
+- performance-based route optimization
+
+The build pattern is sound. The next step is real product wiring and founder testing.
