@@ -1,118 +1,116 @@
-# Architecture
+# App architecture overview
 
-## Overview
+## High-level architecture
 
-The system should behave like a content operating system, not a one-shot text generator.
+LinkedIn Hyperskills is a modular SaaS product made of a small number of message-heavy services:
 
-The core loop is:
+- auth and user service
+- brand memory service
+- content generation service
+- safety and scoring service
+- publishing service
+- analytics service
 
-1. Learn the user’s voice and intent
-2. Generate a draft
-3. Score the draft for quality and risk
-4. Ask for approval
-5. Publish or schedule
-6. Capture results
-7. Improve the next round
+The product is designed to be simple to build and strong enough to scale.
 
-## Core components
+## Core architecture pattern
 
-### 1. Brand memory
+The system follows a simple loop:
 
-A persistent model that captures:
+1. learn the user’s brand profile
+2. generate a draft from a brief
+3. score the draft and check for claim risk
+4. let the user approve or reject
+5. publish or schedule the final content
+6. capture outcomes and improve future drafts
 
-- voice profile
-- founder story
-- strategic goals
-- audience
-- proof points
-- banned language
-- signal patterns
+That loop is the product.
 
-This is the memory layer. Without it, AI content becomes generic fast.
+## Services
 
-### 2. Draft generation layer
+### Auth service
+Responsibilities:
+- signup/login
+- session management
+- user profiles
+- LinkedIn auth integration
 
-Generates content based on:
+### Brand memory service
+Responsibilities:
+- store voice and audience profile
+- extract voice from uploaded sample posts
+- keep proof points and tone signals
+- persist brand state for future generation
 
-- brand memory
-- topic brief
-- audience fit
-- hook requirements
-- CTA goals
+### Content generation service
+Responsibilities:
+- accept brief and brand profile
+- produce 2-3 variants in the user’s voice
+- support founder/operator modes later
 
-### 3. Risk and claim safety layer
+### Safety and scoring service
+Responsibilities:
+- quality scoring
+- claim-risk detection
+- hook and CTA assessment
+- improvement suggestions
 
-Before publishing, it checks:
+### Publishing service
+Responsibilities:
+- approval workflow
+- publish/schedule actions
+- API integration with publishing service
+- fallback copy-paste if needed
 
-- over-claiming
-- unsupported ROI language
-- credibility gaps
-- weak or empty proof
-- AI tell density
-- audience mismatch
+### Analytics service
+Responsibilities:
+- track performance after publishing
+- store engagement and content outcomes
+- enable learning and recommendations later
 
-### 4. Scoring and prioritization
+## Data layer
 
-A scoring engine rates content by:
+Primary stores:
+- PostgreSQL for users, posts, orgs, subscriptions
+- MongoDB for flexible brand profiles and content metadata
+- Redis for cache and queues
+- TimescaleDB or equivalent for analytics
+- S3 for assets and exports
 
-- originality
-- clarity
-- strategic value
-- trustworthiness
-- signal strength
-- audience fit
+## External integrations
 
-### 5. Analytics loop
+- Claude or OpenAI for generation
+- LinkedIn OAuth for auth and account access
+- Publora for publishing
+- Apify for read-side engagement and performance data
+- Pixfaro for image generation later
+- Stripe for billing downstream
 
-This is the missing moat.
+## Security model
 
-The system should store:
+- JWT-based auth
+- OAuth for LinkedIn access
+- RBAC for team and org access
+- secret management for API keys
+- encrypted storage for sensitive data
+- API rate limiting and request logging
 
-- hook type
-- format
-- CTA style
-- topic category
-- engagement data
-- comment quality
-- save/share rate
+## Why this architecture fits the product
 
-Then recommend future content based on what worked.
+This system is intentionally simple and modular. It supports:
 
-### 6. Campaign orchestration
+- fast MVP delivery
+- fewer failure points
+- easier iteration
+- clearer rollout and testing
+- future platform expansion without rewiring the whole stack
 
-A content system should not stop at one post. It should generate:
+## Key principle
 
-- related posts
-- follow-up comments
-- sequence variants
-- offers and CTAs
-- engagement prompts
+Do not build complexity before the wedge is proven.
+The first app should do the four things users need most:
 
-## Technology shape
-
-A good implementation could include:
-
-- Python services for scoring and safety
-- structured JSON memory files or a lightweight database
-- markdown or YAML content briefs
-- analytics ingestion layer
-- optional integration with Publora, Apify, and Pixfaro
-
-## Core principle
-
-The product should optimize for trust, repeatability, and strategic signal.
-
-Not raw volume.
-
-## Resource model
-
-The repo is best treated as a blueprint for an internal, modular system with these layers:
-
-- memory
-- generation
-- scoring
-- publishing
-- analytics
-- feedback
-
-This makes it easier to grow from prototype to real product.
+- remember the user
+- generate drafts
+- flag risk
+- approve before publishing

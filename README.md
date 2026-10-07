@@ -1,133 +1,138 @@
 # LinkedIn Hyperskills
 
-Building the AI content operating system for founder-led LinkedIn growth.
+The AI content operating system for founder-led LinkedIn growth.
 
-Bro, this is the wedge.
+This repo is the strategy, product, technical, and launch foundation for a real product wedge:
 
-Not another AI ghostwriter.
-Not another generic content bot.
-Not another LinkedIn posting tool.
+- brand memory
+- draft generation
+- claim safety
+- approval workflow
 
-A system that helps founders sound more like themselves — faster, clearer, and with more trust.
+That is the core. Everything else is part of the platform story.
 
 ## Why this exists
 
-Founders do not need more generic AI content.
+Founders do not need generic AI writing.
 They need a system that helps them:
 
 - sound like themselves
 - write faster without sounding fake
 - stay consistent with their real voice
-- avoid shaky or risky claims
-- publish from a strategy, not a prompt
+- protect trust and avoid risky claims
+- publish from strategy instead of prompts
 
 LinkedIn is where business happens.
-And personal brand is now a business asset.
+Personal brand is now a business asset.
 
-## The core product
+## The wedge
 
-LinkedIn Hyperskills is a founder-first AI content system built around four pillars:
+LinkedIn Hyperskills is built around one sharp product proposition:
+
+AI that helps founders show up on LinkedIn with clarity, credibility, and speed — without sounding like a bot.
+
+The MVP focuses on four pillars:
 
 1. Brand memory
-   - learns your positioning, tone, proof points, and audience
+   - learns positioning, voice, audience, proof points, banned phrases
 
 2. Draft generation
-   - creates 2-3 post variants in your voice
+   - creates 2-3 draft variants in the user’s real tone
 
 3. Claim safety
-   - flags risky language before you publish
+   - flags risky or overconfident wording before publishing
 
 4. Approval workflow
-   - you review, edit, and approve before anything goes live
+   - lets the user review, edit, and approve before content goes live
 
-That is the wedge.
+This is the real wedge.
 
-## The product promise
+## What the product does
 
-AI should help you sound more like yourself, not less.
+The first release is intentionally narrow and high value:
 
-We help founders and operators turn content into compounding trust.
-
-## What the first release does
-
-The MVP is deliberately narrow and powerful:
-
-- user onboarding and brand profile
-- upload past posts or examples
-- extract voice characteristics
-- generate LinkedIn drafts from topic briefs
-- score drafts for clarity, originality, and trust
-- flag risky claims before publishing
-- human approval before sending live
+- onboarding and brand profile setup
+- sample post upload for voice extraction
+- AI draft generation from a brief
+- score drafts for clarity, originality, trust, and hook strength
+- flag suspect or unverifiable claims
+- approval flow before publish
+- publish or schedule via third-party publishing integration
 
 That is enough to prove the product is useful.
 
 ## Why it matters
 
 Most AI content tools optimize for output volume.
-This product optimizes for signal quality and trust.
+This product optimizes for signal quality, credibility, and trust.
 
 That matters because content is not just writing.
-Content is signal.
-It is authority.
-It is trust.
-It is position.
+Content is:
 
-## The real moat
+- signal
+- authority
+- trust
+- business leverage
 
-The moat is not another writing prompt.
-The moat is the system loop:
-
-- learn the actual voice
-- generate and score drafts
-- verify claims
-- capture performance
-- improve next posts from real outcomes
-
-That is a content operating system.
-
-## Product direction
+## The platform vision
 
 The future product is not "AI writes posts for you."
 The future product is:
 
 - memory-driven personal branding
-- founder-mode strategic content
-- analytics-backed content learning
+- founder-mode content strategy
+- analytics-backed learning
 - campaign orchestration
-- trust-first publishing
+- content intelligence that improves over time
 
-## Current repo structure
+This is the shift from prompt tool to content operating system.
 
-- `docs/` — strategy, roadmap, product research, architecture, launch plan
-- `src/` — starter logic for brand memory, claim safety, and content scoring
-- `README.md` — product narrative and repo overview
+## The moat
+
+The moat is not another writing prompt.
+The moat is the system loop:
+
+- learn the real voice
+- generate and score drafts
+- protect trust with claim checks
+- learn from performance and engagement
+- improve future content from evidence
+
+That is the strategic foundation.
 
 ## Repo map
 
-- `docs/startup-product-brief.md` — startup brief
-- `docs/founder-pitch-2min.md` — 2-minute founder pitch
-- `docs/product-requirements-doc.md` — product spec
-- `docs/architecture.md` — system architecture
-- `docs/technical-data-model.md` — technical shape
-- `docs/launch-plan.md` — go-to-market plan
-- `docs/90-day-mvp-build-roadmap.md` — execution roadmap
-- `docs/founder-pitch-deck-narrative.md` — narrative deck
-- `src/brand_memory.py` — starter brand memory model
-- `src/claim_safety.py` — safety checker
-- `src/content_score.py` — scorer
+### Core strategy and product
+- `docs/startup-product-brief.md` — startup brief and market thesis
+- `docs/founder-pitch-2min.md` — concise founder pitch
+- `docs/product-requirements-doc.md` — product requirements, flows, and KPIs
+- `docs/launch-plan.md` — public launch and growth plan
+- `docs/roadmap-deck-outline.md` — board-facing product roadmap outline
+- `docs/90-day-mvp-build-roadmap.md` — 90-day execution plan
+- `docs/founder-pitch-deck-narrative.md` — narrative pitch deck
+
+### Product system thinking
+- `docs/architecture.md` — app architecture overview
+- `docs/technical-data-model.md` — data model and database design
+- `docs/mvp-ticket-backlog.md` — MVP backlog and ticket scope
+- `docs/landing-page-copy.md` — launch page narrative and CTA copy
+
+### Code starting points
+- `src/brand_memory.py` — starter brand memory profile model
+- `src/claim_safety.py` — claim-risk evaluation logic
+- `src/content_score.py` — draft quality scoring logic
 
 ## Mission statement
 
 Build a neurodivergent-first LinkedIn growth system that turns content into compounding signal — not noise.
 
-## The next step
+## The next move
 
 The MVP is clear.
 The wedge is clear.
 The product story is clear.
 
-The next move is execution.
+The next step is execution.
 
 We build the first slice around:
 - brand memory
@@ -135,12 +140,12 @@ We build the first slice around:
 - claim safety
 - approval workflow
 
-That is the path to traction.
+That is the path to real traction.
 
 ## Closing note
 
-This repo is not trying to be a toy.
+This repo is not a toy.
 It is the foundation for a serious product.
-A product that helps founders show up with clarity, confidence, and trust.
+A product that helps founders show up with clarity, confidence, and trust in one of the most important business channels on the internet.
 
-And that is where the real leverage is.
+That is where the leverage lives.
